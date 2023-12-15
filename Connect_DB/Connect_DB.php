@@ -5,11 +5,11 @@
     try {
         $conn = new PDO("oci:dbname=".$GLOBALS['tns'].";charset=utf8", $GLOBALS['db_username'], $GLOBALS['db_password']);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connected";
+        // echo "Connected";
     } 
     catch(PDOException $e) 
     {
-        echo "Error: " . $e->getMessage();
+        // echo "Error: " . $e->getMessage();
     }
     //    $conn = null;
 ?>

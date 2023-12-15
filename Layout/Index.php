@@ -53,7 +53,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="Index.php?Renderbody=Dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Thống kê doanh thu</span></a>
             </li>
 
             <!-- Divider -->
@@ -61,12 +61,12 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Manager Product
+        
             </div>
             <li class="nav-item">
                 <a class="nav-link" href="Index.php?Renderbody=ListProduct">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Products</span></a>
+                    <span>Quản lý sản phẩm</span></a>
             </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <!-- <li class="nav-item">
@@ -378,9 +378,7 @@
                 <div class="container-fluid">
 
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><?php echo isset($_GET['Renderbody'])? $_GET['Renderbody']:'Dashboard'; ?></h6>
-                        </div>
+                        
                         <div class="card-body">
                             <?php
                                 
