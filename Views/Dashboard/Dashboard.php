@@ -2,7 +2,6 @@
 <?php
 require("../Connect_DB/Connect_DB.php");
 // Doanh thu hôm nay 
-$doanhthuhomnay = 0;
 $sql = "SELECT SUM(tong_tien_hdb) AS total
         FROM hoa_don_ban 
         WHERE TRUNC(ngay_tao_hoa_don) = TRUNC(SYSDATE)
@@ -10,11 +9,9 @@ $sql = "SELECT SUM(tong_tien_hdb) AS total
         ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-// Kiểm tra xem có bản ghi nào được trả về hay không
-if ($stmt->rowCount() > 0) {
-    // Nếu có bản ghi, lấy giá trị từ cột 'total'
-    $doanhthuhomnay = $stmt->fetchColumn();
-}
+
+$doanhthuhomnay = $stmt->fetchColumn();
+
 
 //Số hóa đơn hôm nay
 $sohoadonhomnay = 0;
@@ -25,11 +22,9 @@ $sql = "SELECT count(*) as sohoadonhomnay
         ";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-// Kiểm tra xem có bản ghi nào được trả về hay không
-if ($stmt->rowCount() > 0) {
-    // Nếu có bản ghi, lấy giá trị từ cột 'total'
-    $sohoadonhomnay = $stmt->fetchColumn();
-}
+
+$sohoadonhomnay = $stmt->fetchColumn();
+
 
 //Doanh thu tháng này
 $doanhthuthangnay = 0;
@@ -40,11 +35,8 @@ $sql = "SELECT SUM(tong_tien_hdb) AS total
         AND tinh_trang_hoa_don = 'Đã giao hàng'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-// Kiểm tra xem có bản ghi nào được trả về hay không
-if ($stmt->rowCount() > 0) {
-    // Nếu có bản ghi, lấy giá trị từ cột 'total'
-    $doanhthuthangnay = $stmt->fetchColumn();
-}
+
+$doanhthuthangnay = $stmt->fetchColumn();
 
 //Số hóa đơn tháng này
 $sohoadonthangnay = 0;
@@ -56,10 +48,9 @@ $sql = "SELECT count(*) AS sohoadonthangnay
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 // Kiểm tra xem có bản ghi nào được trả về hay không
-if ($stmt->rowCount() > 0) {
-    // Nếu có bản ghi, lấy giá trị từ cột 'total'
-    $sohoadonthangnay = $stmt->fetchColumn();
-}
+
+$sohoadonthangnay = $stmt->fetchColumn();
+
 
 //Biểu đồ
 $totalchart = [];
