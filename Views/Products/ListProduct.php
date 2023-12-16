@@ -75,7 +75,7 @@
             ?>
                    <tr>
                         <td><?php echo $row['MA_SAN_PHAM']; ?></td>
-                        <td><img src="Anh/<?php echo $row['ANH_DAI_DIEN']; ?>"  alt="lỗi ảnh" style="width: 50px;height:50px;"></td>
+                        <td><img src="../IMG_SanPham/<?php echo $row['ANH_DAI_DIEN']; ?>"  alt="lỗi ảnh" style="width: 90px;height:90px;"></td>
                         <td><?php echo $row['TEN_SAN_PHAM']; ?></td>
                         <td><?php echo $row['TEN_THE_LOAI']; ?></td>
                         <td><?php echo $row['TONG_SO_LUONG']; ?></td>
@@ -84,15 +84,27 @@
                         <td><?php echo $row['GIAM_GIA']; ?></td>
                         
                         <td>
-                            <a href="" class="btn btn-success">
-                                    <i class="bi bi-journals"></i>
-                            </a>
-                            <a href="" class="btn btn-success">
+                        
+                       
+                            <a class="btn btn-success" 
+                            href="Index.php?Renderbody=EditProduct&page=<?php echo $currentPage; ?>
+                            &ma_san_pham=<?php echo $row['MA_SAN_PHAM']; ?>
+                            &ten_san_pham=<?php echo $row['TEN_SAN_PHAM']; ?>
+                            &ma_the_loai=<?php echo $row['MA_THE_LOAI']; ?>
+                            &don_gia_nhap=<?php echo $row['DON_GIA_NHAP']; ?>
+                            &don_gia_ban=<?php echo $row['DON_GIA_BAN']; ?>
+                            &giam_gia=<?php echo $row['GIAM_GIA']; ?>
+                            &anh_dai_dien=<?php echo $row['ANH_DAI_DIEN']; ?>
+                            &mo_ta=<?php echo $row['MO_TA']; ?>">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
-                            <a href="" class="btn btn-danger">
+
+                            <a href="../Views/Products/DeleteProduct.php?ma_san_pham=<?php echo $row['MA_SAN_PHAM']; ?>&page=<?php echo $currentPage ?>" 
+                            onclick="return confirm('Bạn muốn xóa không')" class="btn btn-danger">
                                 <i class="bi bi-x-square-fill"></i>
                             </a>
+                          
+                            
                         </td>
                     </tr> 
             <?php } $conn = null;?>
@@ -113,3 +125,4 @@
         <?php } ?>
     </div>
 </div>
+
