@@ -1,6 +1,8 @@
 
 
-
+<?php
+ob_start(); //<--- Dòng code yêu cầu Output Buffering
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -386,7 +388,23 @@
                                 
                                 if (isset($_GET['Renderbody'])) 
                                 {
+                                    if(isset($_GET['themthanhcong'])==1)
+                                    {
+                                        echo '<script>alert("Thêm thành công!");</script>';
+                                    }
 
+                                    if(isset($_GET['suathanhcong'])==1)
+                                    {
+                                        echo '<script>alert("Sửa thành công!");</script>';
+                                    }
+                                    if(isset($_GET['xoathanhcong']) && $_GET['xoathanhcong'] == 1)
+                                    {
+                                        echo '<script>alert("Xóa thành công!");</script>';
+                                    }
+                                    if(isset($_GET['xoathanhcong']) && $_GET['xoathanhcong']==2)
+                                    {
+                                        echo '<script>alert("Xóa không thành công!");</script>';
+                                    }
                                     switch ($_GET['Renderbody']) 
                                     {
                                         case "Dashboard":
@@ -398,7 +416,10 @@
                                         case "AddProduct":
                                             require("../Views/Products/AddProduct.php");
                                             break;
-                                            
+                                        case "EditProduct":
+                                            require("../Views/Products/EditProduct.php");
+                                            break;
+                                         
                                         default:
                                             require("../Views/Dashboard/Dashboard.php");
                                     }
@@ -457,7 +478,32 @@
             </div>
         </div>
     </div>
-
+    <style>
+        @media (min-width:576px) 
+        {
+            .modal-dialog {
+                max-width: 80%;
+            }
+        }
+    </style>
+     <!-- MODAL -->
+     <div style=""  class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div style="" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Quản lý File</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe style="width:100%; height: 500px; overflow-y:auto; border: none;" 
+                src="../filemanager/dialog.php?type=1&field_id=input-image'"  scrolling="yes"></iframe>
+            </div>
+            <div class="modal-footer" >
+              
+            </div>
+          </div>
+        </div>
+    </div>
     <!-- Bootstrap core JavaScript-->
     <script src="../Template/vendor/jquery/jquery.min.js"></script>
     <script src="../Template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -474,44 +520,60 @@
     <!-- Page level custom scripts -->
     <script src="../Template/js/demo/chart-area-demo.js"></script>
     <script src="../Template/js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>    
+
     <script>
     
         (function() {
-            // 'use strict'
+                // 'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation') //chọn tất cả các class needs-validation và lưu trong mảng form 
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation') //chọn tất cả các class needs-validation và lưu trong mảng form 
 
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms) // chuyển thành mảng trong js 
-                .forEach(function(form) // duyệt mảng
-                    {
-                        form.addEventListener('submit', function(event) {
-                            if (!form.checkValidity()) // kiểm tra nếu k được nhập thì thực hiện hai hàm dưới để ngăn chặn gửi biểu mẫu
-                            {
-                                event.preventDefault()
-                                event.stopPropagation()
-                                form.querySelectorAll(':invalid')[0].focus(); // phần tử đầu tiên k đáp ứng các yêu cầu kiểm tra hợp lệ
-                            }
-                            form.classList.add('was-validated')
-                        }, false)
-                    })
-        })()
-        document.getElementById('image').onchange = function(e) {
-            const previewImage = document.getElementById('previewImage');
-            const fileInput = e.target;
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    previewImage.style.display = 'block';
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else
-                previewImage.style.display = 'none';
-        };
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms) // chuyển thành mảng trong js 
+                    .forEach(function(form) // duyệt mảng
+                        {
+                            form.addEventListener('submit', function(event) {
+                                if (!form.checkValidity()) // kiểm tra nếu k được nhập thì thực hiện hai hàm dưới để ngăn chặn gửi biểu mẫu
+                                {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                    form.querySelectorAll(':invalid')[0].focus(); // phần tử đầu tiên k đáp ứng các yêu cầu kiểm tra hợp lệ
+                                }
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+            })()
+            document.getElementById('image').onchange = function(e) {
+                const previewImage = document.getElementById('previewImage');
+                const fileInput = e.target;
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = 'block';
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else
+                    previewImage.style.display = 'none';
+            };
 
+           
+
+            
+   
+
+        
     </script>
 </body>
 
 </html>
+
+<?php
+ob_end_flush(); //<--- Dòng code yêu cầu in ra tất cả và trả về reponse cho người dùng (Client) 
+?>
