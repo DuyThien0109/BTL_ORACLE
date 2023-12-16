@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $don_gia_ban= $_POST['don_gia_ban'];
     $giam_gia= $_POST['giam_gia'];
     $anh_dai_dien= basename($_FILES["anh_dai_dien"]["name"]);
-    $image_list= $_POST['image_list'];
+    
     $mo_ta= $_POST['mo_ta'];
     // echo $ma_san_pham 
     // . ' - '. $ten_san_pham
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $target_file = "../IMG_SanPham/" . $anh_dai_dien;
     if (move_uploaded_file($_FILES["anh_dai_dien"]["tmp_name"], $target_file))// di chuyển file ảnh từ $_FILES["image"]["tmp_name"] sang thư mục $target_file
     {
-        header("Location: Index.php?Renderbody=ListProduct&themthanhcong=1&page=".$_GET['page']);
+        header("Location: Index.php?Renderbody=ListProduct&themthanhcong=1");
     }
     
     
